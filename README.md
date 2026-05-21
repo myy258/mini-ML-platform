@@ -32,4 +32,4 @@
 ## 备注
 
 目前DEMO可用，后续有空再更新。计划加入更多机器学习模型和一些数据清洗功能，考虑开发可调用本地LLM和线上LLM的模块。
-5.21 - 新增ensemble model模块和LLM模块
+- 5.21 - 新增ensemble model模块和LLM模块
