@@ -44,7 +44,11 @@ class AIMixin:
         sb = self.ai_chat_history.verticalScrollBar()
         sb.setValue(sb.maximum())
 
-    def load_transformers_model(self):
+    def load_transformers_model(self):  
+        if self.radio_api.isChecked():
+            self._load_api_model()
+            return
+        
         if not _check_transformers():
             QMessageBox.warning(self, '警告', '未安装必要库，请运行:\npip install transformers torch')
             return
@@ -313,6 +317,34 @@ class AIMixin:
             import re
             content = re.sub(r'<think>.*?</think>', '', content, flags=re.DOTALL).strip()
         return content
+
+    def _load_api_model(self):
+        api_url    = self.ai_api_url.text().strip()
+        api_key    = self.ai_api_key.text().strip()
+        model_name = self.ai_model_name.text().strip()
+        if not api_url or not api_key or not model_name:
+            QMessageBox.warning(self, '警告', '请填写完整的 API 地址、API Key 和模型名称')
+            return
+        try:
+            headers = {
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {api_key}"
+            }
+            data = {
+                "model": model_name,
+                "messages": [{"role": "user", "content": "hi"}],
+                "max_tokens": 1,
+                "stream": False
+            }
+            response = requests.post(api_url, headers=headers, json=data, timeout=15)
+            response.raise_for_status()
+            self._api_configured = True
+            QMessageBox.information(self, '成功', f'API 连接成功！\n模型: {model_name}')
+            self._append_chat(f"<p style='color:green;'>✓ API 模型 <b>{model_name}</b> 配置成功，可以开始对话。</p>")
+        except Exception as e:
+            self._api_configured = False
+            QMessageBox.critical(self, '错误', f'API 连接失败:\n{str(e)}')
+            self._append_chat(f"<p style='color:red;'>❌ API 连接失败: {str(e)}</p>")
 
     def clear_ai_chat(self):
         self._chat_lines = []
