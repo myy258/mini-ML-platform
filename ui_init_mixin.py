@@ -398,7 +398,7 @@ class UIInitMixin:
         model_type_layout = QHBoxLayout()
         self.ai_model_type_group = QButtonGroup()
         self.radio_transformers = QRadioButton("本地模型 (Transformers)")
-        self.radio_api = QRadioButton("API调用 (推荐)")
+        self.radio_api = QRadioButton("API调用")
         self.radio_api.setChecked(True)
         self.ai_model_type_group.addButton(self.radio_transformers, 1)
         self.ai_model_type_group.addButton(self.radio_api, 2)
