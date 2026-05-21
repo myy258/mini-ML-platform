@@ -20,6 +20,7 @@
 
 ![image](https://github.com/myy258/MINI-DATA-ANALYSIS-PLATFORM/blob/master/img/Screenshot%202026-04-27%20154809.png)
 ![image](https://github.com/myy258/MINI-DATA-ANALYSIS-PLATFORM/blob/master/img/Screenshot%202026-04-27%20155150.png)
+![image](https://github.com/myy258/mini-ML-platform/blob/master/img/Screenshot%202026-05-21%20090129.png)
 
 
 ## 功能介绍
