@@ -8,6 +8,7 @@ from ml_mixin       import MLMixin
 from ensemble_mixin import EnsembleMixin
 from viz_mixin      import VizMixin
 from ai_mixin       import AIMixin
+from db_mixin       import DBMixin
 
 class ExcelViewerQt(QMainWindow,
                     UIInitMixin,
@@ -16,15 +17,16 @@ class ExcelViewerQt(QMainWindow,
                     MLMixin,
                     EnsembleMixin,
                     VizMixin,
-                    AIMixin):
+                    AIMixin,
+                    DBMixin):
     def __init__(self):
         super().__init__()
         self.df                      = None
         self.filtered_df             = None
         self.last_predictions        = None
         self.last_actual             = None
-        self.last_train_predictions  = None   # NEW — for train/test viz
-        self.last_train_actual       = None   # NEW
+        self.last_train_predictions  = None
+        self.last_train_actual       = None
         self.trained_model           = None
         self.trained_scaler          = None
         self.trained_ensemble_model  = None
